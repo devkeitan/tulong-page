@@ -28,7 +28,7 @@ const APP = {
   // Put your logo file in the /public folder and name it logo.png
   logo: "/logo.png",
   // Android: the direct .apk link from your EAS build (or a GitHub Release)
-  androidUrl: "https://expo.dev/artifacts/eas/your-build-id.apk",
+  androidUrl: "https://tinambac-app.noxsolutions.cloud/tinambac-app.apk",
   androidReqs: "Android 7.0+",
   // iOS: your TestFlight public link (delete or leave empty if you have none)
   iosUrl: "https://testflight.apple.com/join/XXXXXXXX",
@@ -185,7 +185,7 @@ export default function LandingPage() {
               </div>
 
               {/* Action Buttons */}
-              <div className="mt-5 grid gap-3 sm:grid-cols-2">
+              <div className="flex grid">
                 {/* Android Button */}
                 <a
                   href={APP.androidUrl}
@@ -205,7 +205,7 @@ export default function LandingPage() {
                 </a>
 
                 {/* iOS Button */}
-                {APP.iosUrl && (
+                {/* {APP.iosUrl && (
                   <a
                     href={APP.iosUrl}
                     target="_blank"
@@ -224,7 +224,7 @@ export default function LandingPage() {
                       </span>
                     </div>
                   </a>
-                )}
+                )} */}
               </div>
 
               {/* Share & Copy Link Strip */}
@@ -313,11 +313,10 @@ export default function LandingPage() {
                 <button
                   type="button"
                   onClick={() => setActivePlatform("android")}
-                  className={`flex items-center gap-2 rounded-lg px-4 py-2 text-xs sm:text-sm font-semibold transition-all ${
-                    activePlatform === "android"
-                      ? "bg-card text-foreground shadow-xs"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
+                  className={`flex items-center gap-2 rounded-lg px-4 py-2 text-xs sm:text-sm font-semibold transition-all ${activePlatform === "android"
+                    ? "bg-card text-foreground shadow-xs"
+                    : "text-muted-foreground hover:text-foreground"
+                    }`}
                 >
                   <Smartphone className="h-4 w-4" />
                   Android Instructions
@@ -325,11 +324,10 @@ export default function LandingPage() {
                 <button
                   type="button"
                   onClick={() => setActivePlatform("ios")}
-                  className={`flex items-center gap-2 rounded-lg px-4 py-2 text-xs sm:text-sm font-semibold transition-all ${
-                    activePlatform === "ios"
-                      ? "bg-card text-foreground shadow-xs"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
+                  className={`flex items-center gap-2 rounded-lg px-4 py-2 text-xs sm:text-sm font-semibold transition-all ${activePlatform === "ios"
+                    ? "bg-card text-foreground shadow-xs"
+                    : "text-muted-foreground hover:text-foreground"
+                    }`}
                 >
                   <Apple className="h-4 w-4" />
                   iOS Instructions
