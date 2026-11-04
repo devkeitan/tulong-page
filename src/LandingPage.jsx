@@ -1,7 +1,6 @@
 import { useState } from "react";
 import {
   Download,
-  Apple,
   Siren,
   ClipboardList,
   MapPin,
@@ -23,16 +22,17 @@ const APP = {
   tagline: "Help is one tap away.",
   description:
     "Send an SOS and report incidents in your community quickly, so responders can act fast when it matters most.",
-  version: "1.0.0",
-  releaseStatus: "Beta",
+  version: "1.0.1",
+  releaseStatus: "Android Beta",
   // Put your logo file in the /public folder and name it logo.png
   logo: "/logo.png",
-  // Android: the direct .apk link from your EAS build (or a GitHub Release)
-  androidUrl: "https://tinambac-app.noxsolutions.cloud/tinambac-app.apk",
+  // Android: the direct .apk link from GitHub Release
+  androidUrl:
+    "https://github.com/devkeitan/tulong-page/releases/download/v1.0.1/tinambac-app.apk",
+  // Web page for the release on GitHub (backup / mirror)
+  releasePageUrl:
+    "https://github.com/devkeitan/tulong-page/releases/tag/v1.0.1",
   androidReqs: "Android 7.0+",
-  // iOS: your TestFlight public link (delete or leave empty if you have none)
-  iosUrl: "https://testflight.apple.com/join/XXXXXXXX",
-  iosReqs: "iOS 15.0+",
   features: [
     {
       icon: Siren,
@@ -69,7 +69,6 @@ const APP = {
 
 export default function LandingPage() {
   const [copied, setCopied] = useState(false);
-  const [activePlatform, setActivePlatform] = useState("android");
 
   const handleCopyLink = async () => {
     try {
@@ -110,7 +109,7 @@ export default function LandingPage() {
           <div className="flex items-center gap-2 sm:gap-3">
             <span className="hidden sm:inline-flex items-center gap-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 px-2.5 py-0.5 text-xs font-semibold text-blue-600 dark:text-blue-400">
               <span className="h-1.5 w-1.5 rounded-full bg-blue-600 animate-pulse" />
-              v{APP.version} {APP.releaseStatus}
+              v{APP.version} • {APP.releaseStatus}
             </span>
             <a
               href="#install-guide"
@@ -131,7 +130,7 @@ export default function LandingPage() {
       {/* HERO SECTION */}
       <main className="flex-1">
         <section className="relative overflow-hidden pt-12 pb-16 sm:pt-20 sm:pb-24">
-          {/* Subtle background ambient tint (no jarring gradient/glass) */}
+          {/* Subtle background ambient tint */}
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-x-0 -top-24 -z-10 flex justify-center overflow-hidden opacity-30 blur-3xl"
@@ -155,7 +154,7 @@ export default function LandingPage() {
               </div>
             </div>
 
-            {/* Direct Heading (no kicker/eyebrow above, respecting craft floor ban) */}
+            {/* Direct Heading */}
             <h1 className="text-4xl font-extrabold tracking-tight sm:text-6xl text-foreground text-balance max-w-3xl leading-[1.12]">
               {APP.tagline}
             </h1>
@@ -165,10 +164,16 @@ export default function LandingPage() {
               {APP.description}
             </p>
 
+            {/* Android Exclusive Notice Badge */}
+            <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-700 dark:text-emerald-400">
+              <Smartphone className="h-3.5 w-3.5" />
+              <span>Available for Android devices • iOS version in development</span>
+            </div>
+
             {/* DOWNLOAD HUB */}
             <div
               id="download"
-              className="mt-10 w-full max-w-xl rounded-2xl border border-border/80 bg-card p-4 sm:p-6 shadow-sm ring-1 ring-foreground/5 text-left"
+              className="mt-8 w-full max-w-xl rounded-2xl border border-border/80 bg-card p-4 sm:p-6 shadow-sm ring-1 ring-foreground/5 text-left"
             >
               <div className="flex items-center justify-between pb-4 border-b border-border/60">
                 <div>
@@ -176,7 +181,7 @@ export default function LandingPage() {
                     Download {APP.name}
                   </h2>
                   <p className="text-xs text-muted-foreground mt-0.5">
-                    Official release for residents of Tinambac, Camarines Sur
+                    Official Android release for residents of Tinambac, Camarines Sur
                   </p>
                 </div>
                 <span className="rounded-md bg-muted px-2 py-1 text-xs font-mono font-medium text-muted-foreground">
@@ -185,50 +190,47 @@ export default function LandingPage() {
               </div>
 
               {/* Action Buttons */}
-              <div className="flex grid">
-                {/* Android Button */}
+              <div className="mt-5 space-y-3">
+                {/* Android Primary Button */}
                 <a
                   href={APP.androidUrl}
-                  className="group relative flex items-center gap-3.5 rounded-xl bg-blue-600 px-4 py-3.5 text-white shadow-sm hover:bg-blue-700 active:scale-[0.99] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
+                  download="tinambac-app.apk"
+                  rel="noopener noreferrer"
+                  className="group relative flex items-center justify-between rounded-xl bg-blue-600 px-4 py-3.5 text-white shadow-sm hover:bg-blue-700 active:scale-[0.99] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
                 >
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white/15 text-white">
-                    <Download className="h-5 w-5 transition-transform group-hover:-translate-y-0.5" />
-                  </div>
-                  <div className="flex flex-col min-w-0">
-                    <span className="text-sm font-semibold leading-tight truncate">
-                      Download Android
-                    </span>
-                    <span className="text-xs text-blue-100 font-medium leading-tight mt-0.5">
-                      Direct .APK • {APP.androidReqs}
-                    </span>
-                  </div>
-                </a>
-
-                {/* iOS Button */}
-                {/* {APP.iosUrl && (
-                  <a
-                    href={APP.iosUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="group flex items-center gap-3.5 rounded-xl border border-border bg-background px-4 py-3.5 text-foreground shadow-xs hover:bg-muted/70 active:scale-[0.99] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
-                  >
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-muted text-foreground">
-                      <Apple className="h-5 w-5 transition-transform group-hover:scale-105" />
+                  <div className="flex items-center gap-3.5">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white/15 text-white">
+                      <Download className="h-5 w-5 transition-transform group-hover:-translate-y-0.5" />
                     </div>
                     <div className="flex flex-col min-w-0">
                       <span className="text-sm font-semibold leading-tight truncate">
-                        Get on iOS
+                        Download for Android
                       </span>
-                      <span className="text-xs text-muted-foreground font-medium leading-tight mt-0.5">
-                        TestFlight • {APP.iosReqs}
+                      <span className="text-xs text-blue-100 font-medium leading-tight mt-0.5">
+                        Direct .APK • {APP.androidReqs}
                       </span>
                     </div>
+                  </div>
+                  <ChevronRight className="h-4 w-4 text-white/70 group-hover:translate-x-0.5 transition-transform shrink-0" />
+                </a>
+
+                {/* Mirror / GitHub Release Backup Link */}
+                <div className="flex flex-wrap items-center justify-between gap-2 px-1 text-xs text-muted-foreground">
+                  <span>Having difficulty with direct download?</span>
+                  <a
+                    href={APP.releasePageUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 font-medium text-blue-600 hover:text-blue-700 transition-colors"
+                  >
+                    <span>Download via GitHub Release page</span>
+                    <ExternalLink className="h-3 w-3" />
                   </a>
-                )} */}
+                </div>
               </div>
 
               {/* Share & Copy Link Strip */}
-              <div className="mt-4 pt-3.5 border-t border-border/60 flex flex-wrap items-center justify-between gap-3 text-xs text-muted-foreground">
+              <div className="mt-5 pt-3.5 border-t border-border/60 flex flex-wrap items-center justify-between gap-3 text-xs text-muted-foreground">
                 <div className="flex items-center gap-2">
                   <ShieldCheck className="h-4 w-4 text-emerald-600" />
                   <span>Verified package • Free for all residents</span>
@@ -255,7 +257,7 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* FEATURES SECTION (Elevated structure with distinct visual weight) */}
+        {/* FEATURES SECTION */}
         <section className="border-t border-border/60 bg-muted/30 py-16 sm:py-20">
           <div className="mx-auto max-w-5xl px-4 sm:px-6">
             <div className="max-w-2xl mb-12">
@@ -297,215 +299,125 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* STEP-BY-STEP INSTALLATION GUIDE */}
+        {/* STEP-BY-STEP INSTALLATION GUIDE (Android Focused) */}
         <section id="install-guide" className="py-16 sm:py-20">
           <div className="mx-auto max-w-4xl px-4 sm:px-6">
             <div className="text-center max-w-2xl mx-auto mb-10">
               <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
-                Installation instructions
+                Android installation instructions
               </h2>
               <p className="mt-2 text-sm sm:text-base text-muted-foreground">
-                Quick steps to get Tulong-Tinambac running properly on your smartphone.
+                Follow these 4 simple steps to install the Tulong-Tinambac APK on your Android smartphone.
               </p>
-
-              {/* Platform Switcher */}
-              <div className="mt-6 inline-flex rounded-xl bg-muted p-1 border border-border/60">
-                <button
-                  type="button"
-                  onClick={() => setActivePlatform("android")}
-                  className={`flex items-center gap-2 rounded-lg px-4 py-2 text-xs sm:text-sm font-semibold transition-all ${activePlatform === "android"
-                    ? "bg-card text-foreground shadow-xs"
-                    : "text-muted-foreground hover:text-foreground"
-                    }`}
-                >
-                  <Smartphone className="h-4 w-4" />
-                  Android Instructions
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setActivePlatform("ios")}
-                  className={`flex items-center gap-2 rounded-lg px-4 py-2 text-xs sm:text-sm font-semibold transition-all ${activePlatform === "ios"
-                    ? "bg-card text-foreground shadow-xs"
-                    : "text-muted-foreground hover:text-foreground"
-                    }`}
-                >
-                  <Apple className="h-4 w-4" />
-                  iOS Instructions
-                </button>
-              </div>
             </div>
 
             {/* Android Instructions Card */}
-            {activePlatform === "android" && (
-              <div className="rounded-2xl border border-border/80 bg-card p-6 sm:p-8 shadow-xs">
-                <div className="flex items-center justify-between pb-6 border-b border-border/60">
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-500/10 text-blue-600">
-                      <Smartphone className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-bold text-foreground">
-                        Installing the Android APK
-                      </h3>
-                      <p className="text-xs text-muted-foreground">
-                        Compatible with Samsung, Xiaomi, Realme, Oppo, Vivo, and other Android devices
-                      </p>
-                    </div>
+            <div className="rounded-2xl border border-border/80 bg-card p-6 sm:p-8 shadow-xs">
+              <div className="flex items-center justify-between pb-6 border-b border-border/60">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-500/10 text-blue-600">
+                    <Smartphone className="h-5 w-5" />
                   </div>
-                  <a
-                    href={APP.androidUrl}
-                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-600 hover:text-blue-700"
-                  >
-                    <span>Download file</span>
-                    <ExternalLink className="h-3 w-3" />
-                  </a>
+                  <div>
+                    <h3 className="text-lg font-bold text-foreground">
+                      Installing the Android APK
+                    </h3>
+                    <p className="text-xs text-muted-foreground">
+                      Compatible with Samsung, Xiaomi, Realme, Oppo, Vivo, Infinix, and other Android devices
+                    </p>
+                  </div>
+                </div>
+                <a
+                  href={APP.androidUrl}
+                  download="tinambac-app.apk"
+                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-600 hover:text-blue-700"
+                >
+                  <span>Download file</span>
+                  <ExternalLink className="h-3 w-3" />
+                </a>
+              </div>
+
+              {/* Social / Messenger in-app browser notice */}
+              <div className="mt-6 flex items-start gap-3 rounded-xl bg-amber-500/10 border border-amber-500/20 p-3.5 text-xs text-amber-800 dark:text-amber-300">
+                <Info className="h-4 w-4 shrink-0 mt-0.5 text-amber-600 dark:text-amber-400" />
+                <div className="space-y-1">
+                  <p className="font-semibold">
+                    Opening from Facebook or Messenger?
+                  </p>
+                  <p className="leading-relaxed text-amber-700 dark:text-amber-400">
+                    Facebook and Messenger block direct file downloads. Tap the three dots (<strong>⋮</strong> or <strong>⋯</strong>) at the top right of your screen and select <strong>"Open in Chrome"</strong> or <strong>"Open in Browser"</strong> to download smoothly.
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-6 space-y-6">
+                <div className="flex gap-4 items-start">
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-blue-600 text-xs font-bold text-white">
+                    1
+                  </span>
+                  <div>
+                    <h4 className="text-sm font-semibold text-foreground">
+                      Download the APK file
+                    </h4>
+                    <p className="text-xs sm:text-sm text-muted-foreground mt-0.5 leading-relaxed">
+                      Tap the <strong>Download for Android</strong> button to save the official installer file (<code className="font-mono text-xs bg-muted px-1.5 py-0.5 rounded">tinambac-app.apk</code>) to your device.
+                    </p>
+                  </div>
                 </div>
 
-                <div className="mt-6 space-y-6">
-                  <div className="flex gap-4 items-start">
-                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-blue-600 text-xs font-bold text-white">
-                      1
-                    </span>
-                    <div>
-                      <h4 className="text-sm font-semibold text-foreground">
-                        Download the APK file
-                      </h4>
-                      <p className="text-xs sm:text-sm text-muted-foreground mt-0.5 leading-relaxed">
-                        Tap the <strong>Download for Android</strong> button to save the official installer file to your device.
-                      </p>
+                <div className="flex gap-4 items-start">
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-blue-600 text-xs font-bold text-white">
+                    2
+                  </span>
+                  <div>
+                    <h4 className="text-sm font-semibold text-foreground">
+                      Open the downloaded file
+                    </h4>
+                    <p className="text-xs sm:text-sm text-muted-foreground mt-0.5 leading-relaxed">
+                      Once downloaded, tap the notification in your status bar or open your device’s <strong>Files</strong> or <strong>Downloads</strong> app and tap the file.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex gap-4 items-start">
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-blue-600 text-xs font-bold text-white">
+                    3
+                  </span>
+                  <div>
+                    <h4 className="text-sm font-semibold text-foreground">
+                      Allow installation from browser (if prompted)
+                    </h4>
+                    <p className="text-xs sm:text-sm text-muted-foreground mt-0.5 leading-relaxed">
+                      If Android shows an "Install unknown apps" or "Security" prompt, tap <strong>Settings</strong> and toggle <strong>Allow from this source</strong> for your browser or file manager.
+                    </p>
+                    <div className="mt-3 flex items-start gap-2 rounded-xl bg-muted/60 p-3 text-xs text-muted-foreground border border-border/50">
+                      <Info className="h-4 w-4 shrink-0 text-blue-600 mt-0.5" />
+                      <span>
+                        <strong>Why this appears:</strong> This is a standard Android security prompt for all direct APK downloads outside the Google Play Store.
+                      </span>
                     </div>
                   </div>
+                </div>
 
-                  <div className="flex gap-4 items-start">
-                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-blue-600 text-xs font-bold text-white">
-                      2
-                    </span>
-                    <div>
-                      <h4 className="text-sm font-semibold text-foreground">
-                        Open the downloaded file
-                      </h4>
-                      <p className="text-xs sm:text-sm text-muted-foreground mt-0.5 leading-relaxed">
-                        Once downloaded, tap the notification in your status bar or find the file in your <strong>Downloads</strong> folder.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-4 items-start">
-                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-blue-600 text-xs font-bold text-white">
-                      3
-                    </span>
-                    <div>
-                      <h4 className="text-sm font-semibold text-foreground">
-                        Allow installation from browser (if prompted)
-                      </h4>
-                      <p className="text-xs sm:text-sm text-muted-foreground mt-0.5 leading-relaxed">
-                        If Android shows an "Install unknown apps" security prompt, tap <strong>Settings</strong> and toggle <strong>Allow from this source</strong> for your browser.
-                      </p>
-                      <div className="mt-3 flex items-start gap-2 rounded-xl bg-muted/60 p-3 text-xs text-muted-foreground border border-border/50">
-                        <Info className="h-4 w-4 shrink-0 text-blue-600 mt-0.5" />
-                        <span>
-                          <strong>Why this appears:</strong> This is a standard Android safety check for apps distributed directly outside Google Play.
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-4 items-start">
-                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-blue-600 text-xs font-bold text-white">
-                      4
-                    </span>
-                    <div>
-                      <h4 className="text-sm font-semibold text-foreground">
-                        Tap Install and grant location permission
-                      </h4>
-                      <p className="text-xs sm:text-sm text-muted-foreground mt-0.5 leading-relaxed">
-                        Tap <strong>Install</strong> to finish. When opening the app, allow Location access so responders can locate you in emergencies.
-                      </p>
-                    </div>
+                <div className="flex gap-4 items-start">
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-blue-600 text-xs font-bold text-white">
+                    4
+                  </span>
+                  <div>
+                    <h4 className="text-sm font-semibold text-foreground">
+                      Tap Install and grant location permission
+                    </h4>
+                    <p className="text-xs sm:text-sm text-muted-foreground mt-0.5 leading-relaxed">
+                      Tap <strong>Install</strong> to complete setup. When you first launch the app, grant Location and Notification permissions so municipal responders can pinpoint your location during an emergency.
+                    </p>
                   </div>
                 </div>
               </div>
-            )}
-
-            {/* iOS Instructions Card */}
-            {activePlatform === "ios" && (
-              <div className="rounded-2xl border border-border/80 bg-card p-6 sm:p-8 shadow-xs">
-                <div className="flex items-center justify-between pb-6 border-b border-border/60">
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-neutral-500/10 text-foreground">
-                      <Apple className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-bold text-foreground">
-                        Installing on iOS via Apple TestFlight
-                      </h3>
-                      <p className="text-xs text-muted-foreground">
-                        Compatible with iPhone running {APP.iosReqs}
-                      </p>
-                    </div>
-                  </div>
-                  {APP.iosUrl && (
-                    <a
-                      href={APP.iosUrl}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-600 hover:text-blue-700"
-                    >
-                      <span>Join TestFlight</span>
-                      <ExternalLink className="h-3 w-3" />
-                    </a>
-                  )}
-                </div>
-
-                <div className="mt-6 space-y-6">
-                  <div className="flex gap-4 items-start">
-                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-foreground text-xs font-bold text-background">
-                      1
-                    </span>
-                    <div>
-                      <h4 className="text-sm font-semibold text-foreground">
-                        Install Apple TestFlight
-                      </h4>
-                      <p className="text-xs sm:text-sm text-muted-foreground mt-0.5 leading-relaxed">
-                        Open the App Store on your iPhone and install Apple’s free official <strong>TestFlight</strong> app.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-4 items-start">
-                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-foreground text-xs font-bold text-background">
-                      2
-                    </span>
-                    <div>
-                      <h4 className="text-sm font-semibold text-foreground">
-                        Accept the invitation
-                      </h4>
-                      <p className="text-xs sm:text-sm text-muted-foreground mt-0.5 leading-relaxed">
-                        Tap the <strong>Get on iOS</strong> button on this page. Your invitation to join {APP.name} will open automatically in TestFlight.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-4 items-start">
-                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-foreground text-xs font-bold text-background">
-                      3
-                    </span>
-                    <div>
-                      <h4 className="text-sm font-semibold text-foreground">
-                        Install and Launch
-                      </h4>
-                      <p className="text-xs sm:text-sm text-muted-foreground mt-0.5 leading-relaxed">
-                        Tap <strong>Accept</strong>, then tap <strong>Install</strong>. Allow location and notification permissions to receive emergency alerts.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
+            </div>
           </div>
         </section>
 
-        {/* EMERGENCY HOTLINE NOTICE (Authoritative & Reassuring) */}
+        {/* EMERGENCY HOTLINE NOTICE */}
         <section className="border-t border-border/60 bg-muted/20 py-12">
           <div className="mx-auto max-w-4xl px-4 sm:px-6">
             <div className="rounded-2xl border border-red-500/25 bg-red-500/5 p-6 sm:p-8">
