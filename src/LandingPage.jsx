@@ -28,7 +28,7 @@ const APP = {
   // Put your logo file in the /public folder and name it logo.png
   logo: "/logo.png",
   // Android: the direct .apk link from your EAS build (or a GitHub Release)
-  androidUrl: "https://expo.dev/artifacts/eas/your-build-id.apk",
+  androidUrl: "https://github.com/devkeitan/tulong-page/releases/download/v1.0.1/tinambac-app.apk",
   androidReqs: "Android 7.0+",
   // iOS: your TestFlight public link (delete or leave empty if you have none)
   iosUrl: "https://testflight.apple.com/join/XXXXXXXX",
