@@ -28,7 +28,7 @@ const APP = {
   logo: "/logo.png",
   // Android: the direct .apk link from GitHub Release
   androidUrl:
-    "https://github.com/devkeitan/tulong-page/releases/download/v1.0.1/tinambac-app.apk",
+    "https://github.com/devkeitan/tulong-page/releases/download/v1.0.2/tinambac-app.apk",
   // Web page for the release on GitHub (backup / mirror)
   releasePageUrl:
     "https://github.com/devkeitan/tulong-page/releases/tag/v1.0.1",
