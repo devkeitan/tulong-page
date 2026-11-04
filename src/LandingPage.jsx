@@ -16,22 +16,21 @@ import {
   Radio,
 } from "lucide-react";
 
-// 1. EDIT THIS OBJECT ONLY: everything on the page reads from here.
 const APP = {
   name: "Tulong-Tinambac",
   tagline: "Help is one tap away.",
   description:
     "Send an SOS and report incidents in your community quickly, so responders can act fast when it matters most.",
-  version: "1.0.1",
+  version: "1.0.2",
   releaseStatus: "Android Beta",
   // Put your logo file in the /public folder and name it logo.png
   logo: "/logo.png",
-  // Android: the direct .apk link from GitHub Release
+  // Permanent link: GitHub always redirects this to the latest published APK release
   androidUrl:
-    "https://github.com/devkeitan/tulong-page/releases/download/v1.0.2/tinambac-app.apk",
-  // Web page for the release on GitHub (backup / mirror)
+    "https://github.com/devkeitan/tulong-page/releases/latest/download/tinambac-app.apk",
+  // Permanent link: GitHub always redirects this to the latest release webpage
   releasePageUrl:
-    "https://github.com/devkeitan/tulong-page/releases/tag/v1.0.1",
+    "https://github.com/devkeitan/tulong-page/releases/latest",
   androidReqs: "Android 7.0+",
   features: [
     {

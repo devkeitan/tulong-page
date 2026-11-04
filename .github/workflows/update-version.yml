@@ -1,0 +1,39 @@
+name: Update App Version on Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  update-version:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Allows the action to push code back to your repo
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Update version string in code
+        run: |
+          # Grabs the tag name (e.g., v1.0.2) and removes the 'v' prefix to get '1.0.2'
+          VERSION=$(echo "${{ github.event.release.tag_name }}" | sed 's/^v//')
+          
+          TARGET_FILE="src/LandingPage.jsx"
+          
+          # Uses sed to look for the line starting with 'version:' and replaces it
+          sed -i "s/version: \".*\"/version: \"$VERSION\"/" $TARGET_FILE
+          
+          echo "Updated version to $VERSION in $TARGET_FILE"
+
+      - name: Commit and Push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          
+          git add src/LandingPage.jsx
+          # Check if there are actual changes before committing to prevent errors
+          git diff-index --quiet HEAD || git commit -m "chore: bump version to ${{ github.event.release.tag_name }} [skip ci]"
+          git push
